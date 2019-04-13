@@ -1,0 +1,173 @@
+#############Program: Select_MAST (Select Markers Around Segregating Traits)
+
+####Streamlining and annotation of this code still in progress
+
+########input data
+setwd("C:/Users/scott/My Documents/R coding")
+###Columns Needed: | Marker Names | CHR | cM.pos | CS.pos | 
+
+###In this case, we're only going to use a Sheet2 file, we've already filtered out the markers we don't want, and are using this tool to help us avoid markers which are inconsistend in mapping positions, and to select markers that are evenly distributed.
+######Sheet2 is the database of the markers calls on markers you have actually run on the lines you're interested in.
+Sheet2<-read.csv("MarkerSelectionForQAMPolymorphic500to1000subsetIdeal sheet2v2.csv",header=TRUE)
+
+
+####Sheet3 is designed to look at specific markers that you have either a linkage map distance, or a physical position for, but not both
+###The intent is that these markers represent important known traits, they will be labled.
+Sheet3<-read.csv("MarkerSelectionForQAMHorizontals Sheet3.csv",header=TRUE)
+
+write.csv(sub.GenotypeCalc2, file=paste(Genotype1," by ",Genotype2,".csv",sep=""))
+
+sub1A.2<-Sheet2[c(Sheet2$CHR=="1A"),]
+sub1B.2<-Sheet2[c(Sheet2$CHR=="1B"),]
+sub1D.2<-Sheet2[c(Sheet2$CHR=="1D"),]
+sub2A.2<-Sheet2[c(Sheet2$CHR=="2A"),]
+sub2B.2<-Sheet2[c(Sheet2$CHR=="2B"),]
+sub2D.2<-Sheet2[c(Sheet2$CHR=="2D"),]
+sub3A.2<-Sheet2[c(Sheet2$CHR=="3A"),]
+sub3B.2<-Sheet2[c(Sheet2$CHR=="3B"),]
+sub3D.2<-Sheet2[c(Sheet2$CHR=="3D"),]
+sub4A.2<-Sheet2[c(Sheet2$CHR=="4A"),]
+sub4B.2<-Sheet2[c(Sheet2$CHR=="4B"),]
+sub4D.2<-Sheet2[c(Sheet2$CHR=="4D"),]
+sub5A.2<-Sheet2[c(Sheet2$CHR=="5A"),]
+sub5B.2<-Sheet2[c(Sheet2$CHR=="5B"),]
+sub5D.2<-Sheet2[c(Sheet2$CHR=="5D"),]
+sub6A.2<-Sheet2[c(Sheet2$CHR=="6A"),]
+sub6B.2<-Sheet2[c(Sheet2$CHR=="6B"),]
+sub6D.2<-Sheet2[c(Sheet2$CHR=="6D"),]
+sub7A.2<-Sheet2[c(Sheet2$CHR=="7A"),]
+sub7B.2<-Sheet2[c(Sheet2$CHR=="7B"),]
+sub7D.2<-Sheet2[c(Sheet2$CHR=="7D"),]
+
+##IdentifyFunction
+identify(CS.pos,cM.pos)
+Selection<-""
+###
+plot(sub1A.2$cM.pos~sub1A.2$CS.pos,col="red",xlim=c(0,620000000),ylim=c(0,160),main="",ylab="Wang et al. 2014 cM",xlab="Chinese Spring Basepairs")
+abline(h=sub1A.3$cM.pos,col=sub1A.3$Color)
+Selection<-identify(sub1A.2$CS.pos,sub1A.2$cM.pos)
+Selection1A<-Selection
+#
+plot(sub1B.2$cM.pos~sub1B.2$CS.pos,col="red",xlim=c(0,720000000),ylim=c(0,180),main="",ylab="Wang et al. 2014 cM",xlab="Chinese Spring Basepairs")
+abline(h=sub1B.3$cM.pos,col=sub1B.3$Color)
+Selection<-identify(sub1B.2$CS.pos,sub1B.2$cM.pos)
+Selection1B<-Selection
+#
+plot(sub1D.2$cM.pos~sub1D.2$CS.pos,col="red",xlim=c(0,520000000),ylim=c(0,210),main="",ylab="Wang et al. 2014 cM",xlab="Chinese Spring Basepairs")
+abline(h=sub1D.3$cM.pos,col=sub1D.3$Color)
+Selection<-identify(sub1D.2$CS.pos,sub1D.2$cM.pos)
+Selection1D<-Selection
+#
+plot(sub2A.2$cM.pos~sub2A.2$CS.pos,col="red",xlim=c(0,820000000),ylim=c(0,190),main="",ylab="Wang et al. 2014 cM",xlab="Chinese Spring Basepairs")
+abline(h=sub2A.3$cM.pos,col=sub2A.3$Color)
+Selection<-identify(sub2A.2$CS.pos,sub2A.2$cM.pos)
+Selection
+Selection2A<-Selection
+#
+plot(sub2B.2$cM.pos~sub2B.2$CS.pos,col="red",xlim=c(0,820000000),ylim=c(0,190),main="",ylab="Wang et al. 2014 cM",xlab="Chinese Spring Basepairs")
+abline(h=sub2B.3$cM.pos,col=sub2B.3$Color)
+Selection<-identify(sub2B.2$CS.pos,sub2B.2$cM.pos)
+Selection2B<-Selection
+#
+plot(sub2D.2$cM.pos~sub2D.2$CS.pos,col="red",xlim=c(0,700000000),ylim=c(0,160),main="",ylab="Wang et al. 2014 cM",xlab="Chinese Spring Basepairs")
+abline(h=sub2D.3$cM.pos,col=sub2D.3$Color)
+Selection<-identify(sub2D.2$CS.pos,sub2D.2$cM.pos)
+Selection2D<-Selection
+#
+plot(sub3A.2$cM.pos~sub3A.2$CS.pos,col="red",xlim=c(0,800000000),ylim=c(0,205),main="",ylab="Wang et al. 2014 cM",xlab="Chinese Spring Basepairs")
+abline(h=sub3A.3$cM.pos,col=sub3A.3$Color)
+Selection<-identify(sub3A.2$CS.pos,sub3A.2$cM.pos)
+Selection3A<-Selection
+#
+plot(sub3B.2$cM.pos~sub3B.2$CS.pos,col="red",xlim=c(0,840000000),ylim=c(0,160),main="",ylab="Wang et al. 2014 cM",xlab="Chinese Spring Basepairs")
+abline(h=sub3B.3$cM.pos,col=sub3B.3$Color)
+Selection<-identify(sub3B.2$CS.pos,sub3B.2$cM.pos)
+Selection3B<-Selection
+#
+plot(sub3D.2$cM.pos~sub3D.2$CS.pos,col="red",xlim=c(0,630000000),ylim=c(0,160),main="",ylab="Wang et al. 2014 cM",xlab="Chinese Spring Basepairs")
+abline(h=sub3D.3$cM.pos,col=sub3D.3$Color)
+Selection<-identify(sub3D.2$CS.pos,sub3D.2$cM.pos)
+Selection3D<-Selection
+
+plot(sub4A.2$cM.pos~sub4A.2$CS.pos,col="red",xlim=c(0,780000000),ylim=c(0,175),main="",ylab="Wang et al. 2014 cM",xlab="Chinese Spring Basepairs")
+abline(h=sub4A.3$cM.pos,col=sub4A.3$Color)
+Selection<-identify(sub4A.2$CS.pos,sub4A.2$cM.pos)
+Selection4A<-Selection
+
+plot(sub4B.2$cM.pos~sub4B.2$CS.pos,col="red",xlim=c(0,700000000),ylim=c(0,130),main="",ylab="Wang et al. 2014 cM",xlab="Chinese Spring Basepairs")
+abline(h=sub4B.3$cM.pos,col=sub4B.3$Color)
+Selection<-identify(sub4B.2$CS.pos,sub4B.2$cM.pos)
+Selection4B<-Selection
+
+plot(sub4D.2$cM.pos~sub4D.2$CS.pos,col="red",xlim=c(0,520000000),ylim=c(0,160),main="",ylab="Wang et al. 2014 cM",xlab="Chinese Spring Basepairs")
+abline(h=sub4D.3$cM.pos,col=sub4D.3$Color)
+Selection<-identify(sub4D.2$CS.pos,sub4D.2$cM.pos)
+Selection4D<-Selection
+
+plot(sub5A.2$cM.pos~sub5A.2$CS.pos,col="red",xlim=c(0,730000000),ylim=c(0,155),main="",ylab="Wang et al. 2014 cM",xlab="Chinese Spring Basepairs")
+abline(h=sub5A.3$cM.pos,col=sub5A.3$Color)
+Selection<-identify(sub5A.2$CS.pos,sub5A.2$cM.pos)
+Selection5A<-Selection
+
+plot(sub5B.2$cM.pos~sub5B.2$CS.pos,col="red",xlim=c(0,730000000),ylim=c(0,230),main="",ylab="Wang et al. 2014 cM",xlab="Chinese Spring Basepairs")
+abline(h=sub5B.3$cM.pos,col=sub5B.3$Color)
+Selection<-identify(sub5B.2$CS.pos,sub5B.2$cM.pos)
+Selection5B<-Selection
+
+plot(sub5D.2$cM.pos~sub5D.2$CS.pos,col="red",xlim=c(0,600000000),ylim=c(0,225),main="",ylab="Wang et al. 2014 cM",xlab="Chinese Spring Basepairs")
+abline(h=sub5D.3$cM.pos,col=sub5D.3$Color)
+Selection<-identify(sub5D.2$CS.pos,sub5D.2$cM.pos)
+Selection5D<-Selection
+
+plot(sub6A.2$cM.pos~sub6A.2$CS.pos,col="red",xlim=c(0,640000000),ylim=c(0,190),main="",ylab="Wang et al. 2014 cM",xlab="Chinese Spring Basepairs")
+abline(h=sub6A.3$cM.pos,col=sub6A.3$Color)
+Selection<-identify(sub6A.2$CS.pos,sub6A.2$cM.pos)
+Selection6A<-Selection
+
+plot(sub6B.2$cM.pos~sub6B.2$CS.pos,col="red",xlim=c(0,770000000),ylim=c(0,140),main="",ylab="Wang et al. 2014 cM",xlab="Chinese Spring Basepairs")
+abline(h=sub6B.3$cM.pos,col=sub6B.3$Color)
+Selection<-identify(sub6B.2$CS.pos,sub6B.2$cM.pos)
+Selection6B<-Selection
+
+plot(sub6D.2$cM.pos~sub6D.2$CS.pos,col="red",xlim=c(0,500000000),ylim=c(0,170),main="",ylab="Wang et al. 2014 cM",xlab="Chinese Spring Basepairs")
+abline(h=sub6D.3$cM.pos,col=sub6D.3$Color)
+Selection<-identify(sub6D.2$CS.pos,sub6D.2$cM.pos)
+Selection6D<-Selection
+
+plot(sub7A.2$cM.pos~sub7A.2$CS.pos,col="red",xlim=c(0,770000000),ylim=c(0,250),main="",ylab="Wang et al. 2014 cM",xlab="Chinese Spring Basepairs")
+abline(h=sub7A.3$cM.pos,col=sub7A.3$Color)
+Selection<-identify(sub7A.2$CS.pos,sub7A.2$cM.pos)
+Selection7A<-Selection
+
+plot(sub7B.2$cM.pos~sub7B.2$CS.pos,col="red",xlim=c(0,800000000),ylim=c(0,190),main="",ylab="Wang et al. 2014 cM",xlab="Chinese Spring Basepairs")
+abline(h=sub7B.3$cM.pos,col=sub7B.3$Color)
+Selection<-identify(sub7B.2$CS.pos,sub7B.2$cM.pos)
+Selection7B<-Selection
+
+plot(sub7D.2$cM.pos~sub7D.2$CS.pos,col="red",xlim=c(0,700000000),ylim=c(0,250),main="",ylab="Wang et al. 2014 cM",xlab="Chinese Spring Basepairs")
+abline(h=sub7D.3$cM.pos,col=sub7D.3$Color)
+Selection<-identify(sub7D.2$CS.pos,sub7D.2$cM.pos)
+Selection7D<-Selection
+
+
+Selection1A
+Selection1B
+Selection1D
+Selection2A
+Selection2B
+Selection2D
+Selection3A
+Selection3B
+Selection3D
+Selection4A
+Selection4B
+Selection4D
+Selection5A
+Selection5B
+Selection5D
+Selection6A
+Selection6B
+Selection6D
+Selection7A
+Selection7B
+Selection7D
