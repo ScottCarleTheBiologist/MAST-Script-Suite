@@ -1,0 +1,169 @@
+#############Program Double_MAST (Double Markers Around Segregating Traits)
+########Author: Scott Carle
+#####Original Organism: Triticum Aestivum: Wheat
+###Script Language: R
+
+#Code Start
+
+Filename<-("Example_Double_MAP")
+
+########input data
+###########Set your working directory to where you have your files for R stored
+
+setwd("F:")
+
+###Markers along the Y axis, Genotypes along the X axis
+####Sheet1 isn't technically essential, but gives a better idea of all the points you know, we used Wang et al. 2014 and Chinese Spring Genome positions
+
+Sheet1<-read.csv("Example_Double_MAST_AllMarkersSheet1.csv",header=TRUE)
+
+######Sheet2 is a subset of the markers from Sheet1 that you're interested in for a specific reason. 
+########There are many cases where seeing the distribution of your markers of interest on top of the general chromosome plot can be surprisingly enlightening.
+###Columns Needed: | Marker Names | CHR | cM.pos | CS.pos |
+
+Sheet2<-read.csv("Example_Double_MAST_Sheet2.csv",header=TRUE)
+
+######subsetting data for chromosomes from all 3
+sub1A.2<-Sheet2[c(Sheet2$CHR=="1A"),]
+sub1B.2<-Sheet2[c(Sheet2$CHR=="1B"),]
+sub1D.2<-Sheet2[c(Sheet2$CHR=="1D"),]
+sub2A.2<-Sheet2[c(Sheet2$CHR=="2A"),]
+sub2B.2<-Sheet2[c(Sheet2$CHR=="2B"),]
+sub2D.2<-Sheet2[c(Sheet2$CHR=="2D"),]
+sub3A.2<-Sheet2[c(Sheet2$CHR=="3A"),]
+sub3B.2<-Sheet2[c(Sheet2$CHR=="3B"),]
+sub3D.2<-Sheet2[c(Sheet2$CHR=="3D"),]
+sub4A.2<-Sheet2[c(Sheet2$CHR=="4A"),]
+sub4B.2<-Sheet2[c(Sheet2$CHR=="4B"),]
+sub4D.2<-Sheet2[c(Sheet2$CHR=="4D"),]
+sub5A.2<-Sheet2[c(Sheet2$CHR=="5A"),]
+sub5B.2<-Sheet2[c(Sheet2$CHR=="5B"),]
+sub5D.2<-Sheet2[c(Sheet2$CHR=="5D"),]
+sub6A.2<-Sheet2[c(Sheet2$CHR=="6A"),]
+sub6B.2<-Sheet2[c(Sheet2$CHR=="6B"),]
+sub6D.2<-Sheet2[c(Sheet2$CHR=="6D"),]
+sub7A.2<-Sheet2[c(Sheet2$CHR=="7A"),]
+sub7B.2<-Sheet2[c(Sheet2$CHR=="7B"),]
+sub7D.2<-Sheet2[c(Sheet2$CHR=="7D"),]
+
+sub1A.1<-Sheet1[c(Sheet1$CHR=="1A"),]
+sub1B.1<-Sheet1[c(Sheet1$CHR=="1B"),]
+sub1D.1<-Sheet1[c(Sheet1$CHR=="1D"),]
+sub2A.1<-Sheet1[c(Sheet1$CHR=="2A"),]
+sub2B.1<-Sheet1[c(Sheet1$CHR=="2B"),]
+sub2D.1<-Sheet1[c(Sheet1$CHR=="2D"),]
+sub3A.1<-Sheet1[c(Sheet1$CHR=="3A"),]
+sub3B.1<-Sheet1[c(Sheet1$CHR=="3B"),]
+sub3D.1<-Sheet1[c(Sheet1$CHR=="3D"),]
+sub4A.1<-Sheet1[c(Sheet1$CHR=="4A"),]
+sub4B.1<-Sheet1[c(Sheet1$CHR=="4B"),]
+sub4D.1<-Sheet1[c(Sheet1$CHR=="4D"),]
+sub5A.1<-Sheet1[c(Sheet1$CHR=="5A"),]
+sub5B.1<-Sheet1[c(Sheet1$CHR=="5B"),]
+sub5D.1<-Sheet1[c(Sheet1$CHR=="5D"),]
+sub6A.1<-Sheet1[c(Sheet1$CHR=="6A"),]
+sub6B.1<-Sheet1[c(Sheet1$CHR=="6B"),]
+sub6D.1<-Sheet1[c(Sheet1$CHR=="6D"),]
+sub7A.1<-Sheet1[c(Sheet1$CHR=="7A"),]
+sub7B.1<-Sheet1[c(Sheet1$CHR=="7B"),]
+sub7D.1<-Sheet1[c(Sheet1$CHR=="7D"),]
+
+
+##expanded plots
+#############This section plots out the Sheet1 background sum of markers for each chromosome in black, and then the special series you want to highlight from Sheet2 on top of them in red
+########for this section, it is important to fix the max and min coordinates for each graph, or rescaling occurs that ruins the cross comparisons.
+####If any of these series which the commands attempt to plot don't have relevant data for them, an error message will occur, but this is not a problem, and will not negatively affect your results.
+###If you're using a different organism than wheat, or a different linkage map than Wang et al. 2014 or Maccaferri et al. 2015, you'll at the very least need to change the centimorgan bounds for these plots.
+##With other organisms, the chromosomes will have different names, but you'll notice that this code is modular, and can easily be changed and adapted for different numbers or names of chromosomes.
+##Different organisms will also have different reference genomes, and thus the physical position bounds for the xlim command will need to be changed for proper adaptation.
+
+#This code starts the creation of the .pdf file, and will finish once all commands in this section have been successfully run. Look for the file in your working directory with the name of "[Parent1] by [Parent2].pdf"
+
+pdf(paste(Filename,".pdf",sep=""))
+
+plot(sub1A.1$cM.pos~sub1A.1$CS.pos,col="grey",xlim=c(0,620000000),ylim=c(0,160),main="1A",ylab="Wang et al. 2014 cM",xlab="Chinese Spring Basepairs")
+par(new=T)
+plot(sub1A.2$cM.pos~sub1A.2$CS.pos,col="red",xlim=c(0,620000000),ylim=c(0,160),main="",ylab="Wang et al. 2014 cM",xlab="Chinese Spring Basepairs")
+
+plot(sub1B.1$cM.pos~sub1B.1$CS.pos,col="grey",xlim=c(0,720000000),ylim=c(0,180),main="1B",ylab="Wang et al. 2014 cM",xlab="Chinese Spring Basepairs")
+par(new=T)
+plot(sub1B.2$cM.pos~sub1B.2$CS.pos,col="red",xlim=c(0,720000000),ylim=c(0,180),main="",ylab="Wang et al. 2014 cM",xlab="Chinese Spring Basepairs")
+
+plot(sub1D.1$cM.pos~sub1D.1$CS.pos,col="grey",xlim=c(0,520000000),ylim=c(0,210),main="1D",ylab="Wang et al. 2014 cM",xlab="Chinese Spring Basepairs")
+par(new=T)
+plot(sub1D.2$cM.pos~sub1D.2$CS.pos,col="red",xlim=c(0,520000000),ylim=c(0,210),main="",ylab="Wang et al. 2014 cM",xlab="Chinese Spring Basepairs")
+
+plot(sub2A.1$cM.pos~sub2A.1$CS.pos,col="grey",xlim=c(0,820000000),ylim=c(0,190),main="2A",ylab="Wang et al. 2014 cM",xlab="Chinese Spring Basepairs")
+par(new=T)
+plot(sub2A.2$cM.pos~sub2A.2$CS.pos,col="red",xlim=c(0,820000000),ylim=c(0,190),main="",ylab="Wang et al. 2014 cM",xlab="Chinese Spring Basepairs")
+
+plot(sub2B.1$cM.pos~sub2B.1$CS.pos,col="grey",xlim=c(0,820000000),ylim=c(0,190),main="2B",ylab="Wang et al. 2014 cM",xlab="Chinese Spring Basepairs")
+par(new=T)
+plot(sub2B.2$cM.pos~sub2B.2$CS.pos,col="red",xlim=c(0,820000000),ylim=c(0,190),main="",ylab="Wang et al. 2014 cM",xlab="Chinese Spring Basepairs")
+
+plot(sub2D.1$cM.pos~sub2D.1$CS.pos,col="grey",xlim=c(0,700000000),ylim=c(0,160),main="2D",ylab="Wang et al. 2014 cM",xlab="Chinese Spring Basepairs")
+par(new=T)
+plot(sub2D.2$cM.pos~sub2D.2$CS.pos,col="red",xlim=c(0,700000000),ylim=c(0,160),main="",ylab="Wang et al. 2014 cM",xlab="Chinese Spring Basepairs")
+
+plot(sub3A.1$cM.pos~sub3A.1$CS.pos,col="grey",xlim=c(0,800000000),ylim=c(0,205),main="3A",ylab="Wang et al. 2014 cM",xlab="Chinese Spring Basepairs")
+par(new=T)
+plot(sub3A.2$cM.pos~sub3A.2$CS.pos,col="red",xlim=c(0,800000000),ylim=c(0,205),main="",ylab="Wang et al. 2014 cM",xlab="Chinese Spring Basepairs")
+
+plot(sub3B.1$cM.pos~sub3B.1$CS.pos,col="grey",xlim=c(0,840000000),ylim=c(0,160),main="3B",ylab="Wang et al. 2014 cM",xlab="Chinese Spring Basepairs")
+par(new=T)
+plot(sub3B.2$cM.pos~sub3B.2$CS.pos,col="red",xlim=c(0,840000000),ylim=c(0,160),main="",ylab="Wang et al. 2014 cM",xlab="Chinese Spring Basepairs")
+
+plot(sub3D.1$cM.pos~sub3D.1$CS.pos,col="grey",xlim=c(0,630000000),ylim=c(0,160),main="3D",ylab="Wang et al. 2014 cM",xlab="Chinese Spring Basepairs")
+par(new=T)
+plot(sub3D.2$cM.pos~sub3D.2$CS.pos,col="red",xlim=c(0,630000000),ylim=c(0,160),main="",ylab="Wang et al. 2014 cM",xlab="Chinese Spring Basepairs")
+
+plot(sub4A.1$cM.pos~sub4A.1$CS.pos,col="grey",xlim=c(0,780000000),ylim=c(0,175),main="4A",ylab="Wang et al. 2014 cM",xlab="Chinese Spring Basepairs")
+par(new=T)
+plot(sub4A.2$cM.pos~sub4A.2$CS.pos,col="red",xlim=c(0,780000000),ylim=c(0,175),main="",ylab="Wang et al. 2014 cM",xlab="Chinese Spring Basepairs")
+
+plot(sub4B.1$cM.pos~sub4B.1$CS.pos,col="grey",xlim=c(0,700000000),ylim=c(0,130),main="4B",ylab="Wang et al. 2014 cM",xlab="Chinese Spring Basepairs")
+par(new=T)
+plot(sub4B.2$cM.pos~sub4B.2$CS.pos,col="red",xlim=c(0,700000000),ylim=c(0,130),main="",ylab="Wang et al. 2014 cM",xlab="Chinese Spring Basepairs")
+
+plot(sub4D.1$cM.pos~sub4D.1$CS.pos,col="grey",xlim=c(0,520000000),ylim=c(0,160),main="4D",ylab="Wang et al. 2014 cM",xlab="Chinese Spring Basepairs")
+par(new=T)
+plot(sub4D.2$cM.pos~sub4D.2$CS.pos,col="red",xlim=c(0,520000000),ylim=c(0,160),main="",ylab="Wang et al. 2014 cM",xlab="Chinese Spring Basepairs")
+
+plot(sub5A.1$cM.pos~sub5A.1$CS.pos,col="grey",xlim=c(0,730000000),ylim=c(0,155),main="5A",ylab="Wang et al. 2014 cM",xlab="Chinese Spring Basepairs")
+par(new=T)
+plot(sub5A.2$cM.pos~sub5A.2$CS.pos,col="red",xlim=c(0,730000000),ylim=c(0,155),main="",ylab="Wang et al. 2014 cM",xlab="Chinese Spring Basepairs")
+
+plot(sub5B.1$cM.pos~sub5B.1$CS.pos,col="grey",xlim=c(0,730000000),ylim=c(0,230),main="5B",ylab="Wang et al. 2014 cM",xlab="Chinese Spring Basepairs")
+par(new=T)
+plot(sub5B.2$cM.pos~sub5B.2$CS.pos,col="red",xlim=c(0,730000000),ylim=c(0,230),main="",ylab="Wang et al. 2014 cM",xlab="Chinese Spring Basepairs")
+
+plot(sub5D.1$cM.pos~sub5D.1$CS.pos,col="grey",xlim=c(0,600000000),ylim=c(0,225),main="5D",ylab="Wang et al. 2014 cM",xlab="Chinese Spring Basepairs")
+par(new=T)
+plot(sub5D.2$cM.pos~sub5D.2$CS.pos,col="red",xlim=c(0,600000000),ylim=c(0,225),main="",ylab="Wang et al. 2014 cM",xlab="Chinese Spring Basepairs")
+
+plot(sub6A.1$cM.pos~sub6A.1$CS.pos,col="grey",xlim=c(0,640000000),ylim=c(0,190),main="6A",ylab="Wang et al. 2014 cM",xlab="Chinese Spring Basepairs")
+par(new=T)
+plot(sub6A.2$cM.pos~sub6A.2$CS.pos,col="red",xlim=c(0,640000000),ylim=c(0,190),main="",ylab="Wang et al. 2014 cM",xlab="Chinese Spring Basepairs")
+
+plot(sub6B.1$cM.pos~sub6B.1$CS.pos,col="grey",xlim=c(0,770000000),ylim=c(0,140),main="6B",ylab="Wang et al. 2014 cM",xlab="Chinese Spring Basepairs")
+par(new=T)
+plot(sub6B.2$cM.pos~sub6B.2$CS.pos,col="red",xlim=c(0,770000000),ylim=c(0,140),main="",ylab="Wang et al. 2014 cM",xlab="Chinese Spring Basepairs")
+
+plot(sub6D.1$cM.pos~sub6D.1$CS.pos,col="grey",xlim=c(0,500000000),ylim=c(0,170),main="6D",ylab="Wang et al. 2014 cM",xlab="Chinese Spring Basepairs")
+par(new=T)
+plot(sub6D.2$cM.pos~sub6D.2$CS.pos,col="red",xlim=c(0,500000000),ylim=c(0,170),main="",ylab="Wang et al. 2014 cM",xlab="Chinese Spring Basepairs")
+
+plot(sub7A.1$cM.pos~sub7A.1$CS.pos,col="grey",xlim=c(0,770000000),ylim=c(0,250),main="7A",ylab="Wang et al. 2014 cM",xlab="Chinese Spring Basepairs")
+par(new=T)
+plot(sub7A.2$cM.pos~sub7A.2$CS.pos,col="red",xlim=c(0,770000000),ylim=c(0,250),main="",ylab="Wang et al. 2014 cM",xlab="Chinese Spring Basepairs")
+
+plot(sub7B.1$cM.pos~sub7B.1$CS.pos,col="grey",xlim=c(0,800000000),ylim=c(0,190),main="7B",ylab="Wang et al. 2014 cM",xlab="Chinese Spring Basepairs")
+par(new=T)
+plot(sub7B.2$cM.pos~sub7B.2$CS.pos,col="red",xlim=c(0,800000000),ylim=c(0,190),main="",ylab="Wang et al. 2014 cM",xlab="Chinese Spring Basepairs")
+
+plot(sub7D.1$cM.pos~sub7D.1$CS.pos,col="grey",xlim=c(0,700000000),ylim=c(0,250),main="7D",ylab="Wang et al. 2014 cM",xlab="Chinese Spring Basepairs")
+par(new=T)
+plot(sub7D.2$cM.pos~sub7D.2$CS.pos,col="red",xlim=c(0,700000000),ylim=c(0,250),main="",ylab="Wang et al. 2014 cM",xlab="Chinese Spring Basepairs")
+
+
+dev.off()
