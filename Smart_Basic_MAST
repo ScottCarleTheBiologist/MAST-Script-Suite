@@ -1,0 +1,26 @@
+####Work In Progress
+
+###############Program: Smart_Basic_Mast
+########Author: Scott Carle
+###Script Language: R
+
+###Use this script if you want to compare the genetic positions of a linkage map to the positions of a physical map.
+##No packages are necessary to run this script, only base R commands.
+
+###Begin Code:
+####Define the name of your file
+
+OutputName<-("Example_MAP")
+setwd("E:/")
+Sheet1<-read.csv("MASTSheet1.csv",header=TRUE)
+CHRLIST<-unique(Sheet1$CHR)
+CHRLIST
+i<-1
+
+pdf(paste(OutputName,".pdf",sep=""))
+for(i in c(1:length(CHRLIST)))
+{
+subCHR<-Sheet1[c(Sheet1$CHR==CHRLIST[i]),]
+plot(subCHR$cM.pos~subCHR$CS.pos,main=paste(CHRLIST[i]),ylab="Custom Map cM",xlab="Basepairs Along Chromosome")
+}
+dev.off()
